@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"email" varchar(256) NOT NULL,
 	"password" varchar(256) NOT NULL,
 	"application_id" uuid,
+	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 

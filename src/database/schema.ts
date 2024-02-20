@@ -22,7 +22,7 @@ export const users = pgTable(
     email: varchar("email", { length: 256 }).notNull(),
     password: varchar("password", { length: 256 }).notNull(),
     applicationId: uuid("application_id").references(() => applications.id),
-    createdAt: timestamp("updated_at").defaultNow().notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (users) => {

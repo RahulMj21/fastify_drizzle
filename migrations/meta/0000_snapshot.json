@@ -1,5 +1,5 @@
 {
-  "id": "47608edc-7168-47a5-a0dd-98fa8bf0b134",
+  "id": "1c443c05-72e1-47db-9f83-6d95c303126e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -75,6 +75,13 @@
           "type": "uuid",
           "primaryKey": false,
           "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
