@@ -1,10 +1,10 @@
 import {
   pgTable,
-  primaryKey,
   timestamp,
   uniqueIndex,
   uuid,
   varchar,
+  text,
 } from "drizzle-orm/pg-core";
 
 export const applications = pgTable("applications", {
@@ -29,6 +29,50 @@ export const users = pgTable(
     return {
       cpk: [users.email, users.applicationId],
       idIndex: uniqueIndex("users_id_index").on(users.id),
+    };
+  },
+);
+
+export const roles = pgTable(
+  "roles",
+  {
+    id: uuid("id").defaultRandom().notNull(),
+    name: varchar("name", { length: 256 }).notNull(),
+    applicationId: uuid("application_id").references(() => applications.id),
+    permissions: text("permissions").array().$type<Array<string>>(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  },
+  (roles) => {
+    return {
+      cpk: [roles.name, roles.applicationId],
+      idIndex: uniqueIndex("roles_id_index").on(roles.id),
+    };
+  },
+);
+
+export const usersToRoles = pgTable(
+  "usersToRoles",
+  {
+    applicationId: uuid("application_id")
+      .references(() => applications.id)
+      .notNull(),
+
+    roleId: uuid("role_id")
+      .references(() => roles.id)
+      .notNull(),
+
+    userId: uuid("user_id")
+      .references(() => users.id)
+      .notNull(),
+  },
+  (usersToRoles) => {
+    return {
+      cpk: [
+        usersToRoles.applicationId,
+        usersToRoles.roleId,
+        usersToRoles.userId,
+      ],
     };
   },
 );
