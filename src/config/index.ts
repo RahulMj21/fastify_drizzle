@@ -12,6 +12,7 @@ const config = {
   DB_URL: process.env.DB_URL as string,
   WEB_APP_URL: process.env.WEB_APP_URL as string,
   PORT: process.env.PORT || 8000,
+  HOST: process.env.HOST || "0.0.0.0",
 };
 
 export default config;

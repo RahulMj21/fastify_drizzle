@@ -2,10 +2,11 @@ import Fastify from "fastify";
 import cors from "@fastify/cors";
 import { healthcheckRoutes, userRoutes } from "@/routes";
 import config from "@/config";
+import logger from "@/utils/logger";
 
 const buildServer = () => {
   const fastify = Fastify({
-    logger: true,
+    logger,
   });
 
   // register plugins
