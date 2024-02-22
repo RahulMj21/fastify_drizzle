@@ -18,7 +18,7 @@ export const PERMISSIONS = ALL_PERMISSIONS.reduce((acc, permission) => {
   return acc;
 }, {} as TPermissions);
 
-export const USER_ROLE = [
+export const APPLICATION_USER_PERMISSIONS = [
   PERMISSIONS["posts:write"],
   PERMISSIONS["posts:delete"],
 ];

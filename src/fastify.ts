@@ -23,7 +23,7 @@ const buildServer = () => {
   });
 
   // register routes
-  fastify.register(applicationsRoutes, { prefix: "/api/v1/applicataions" });
+  fastify.register(applicationsRoutes, { prefix: "/api/v1/applications" });
 
   return fastify;
 };
