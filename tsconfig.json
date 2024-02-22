@@ -4,7 +4,10 @@
     "module": "commonjs",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@/applications/*": ["src/modules/applications/*"],
+      "@/roles/*": ["src/modules/roles/*"],
+      "@/users/*": ["src/modules/users/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

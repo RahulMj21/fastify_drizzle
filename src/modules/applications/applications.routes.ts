@@ -1,10 +1,14 @@
+import ApplicationsControllers from "@/applications/applications.controllers";
+import { createApplicationJSONSchema } from "@/applications/applications.schemas";
 import { FastifyInstance } from "fastify";
-import ApplicationsControllers from "@/modules/applications/applications.controllers";
 
 const applicationsRoutes = async (fastify: FastifyInstance) => {
   const controllers = new ApplicationsControllers();
 
-  fastify.post("/", { handler: controllers.createApplication });
+  fastify.post("/", {
+    schema: createApplicationJSONSchema,
+    handler: controllers.createApplication,
+  });
   fastify.get("/", { handler: controllers.getApplications });
 };
 

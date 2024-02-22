@@ -1,4 +1,7 @@
-import ApplicationServices from "@/modules/applications/applications.services";
+import ApplicationServices from "@/applications/applications.services";
+import { TCreateApplicationInput } from "@/applications/applications.schemas";
+import { FastifyReply, FastifyRequest } from "fastify";
+import { STATUS_CODE, STATUS_TEXT } from "@/utils/constants";
 
 class ApplicationsControllers {
   services: ApplicationServices;
@@ -7,7 +10,17 @@ class ApplicationsControllers {
     this.services = new ApplicationServices();
   }
 
-  createApplication = async () => {};
+  createApplication = async (
+    request: FastifyRequest<{ Body: TCreateApplicationInput }>,
+    reply: FastifyReply,
+  ) => {
+    const { name } = request.body;
+    const application = await this.services.createApplication({ name });
+
+    return reply
+      .code(STATUS_CODE.CREATED)
+      .serialize({ status: STATUS_TEXT.OK, data: application });
+  };
 
   getApplications = async () => {};
 }
