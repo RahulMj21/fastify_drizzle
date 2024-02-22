@@ -1,8 +1,12 @@
 export const ALL_PERMISSIONS = [
-  //users
-  "users:roles:create",
+  // users
+  "users:roles:write",
   "users:roles:delete",
-];
+
+  // posts
+  "posts:write",
+  "posts:delete",
+] as const;
 
 type TPermissions = Record<
   (typeof ALL_PERMISSIONS)[number],
@@ -13,3 +17,13 @@ export const PERMISSIONS = ALL_PERMISSIONS.reduce((acc, permission) => {
   acc[permission] = permission;
   return acc;
 }, {} as TPermissions);
+
+export const USER_ROLE = [
+  PERMISSIONS["posts:write"],
+  PERMISSIONS["posts:delete"],
+];
+
+export const SYSTEM_ROLES = {
+  SUPER_ADMIN: "SUPER_ADMIN",
+  APPLICATION_USER: "APPLICATION_USER",
+};
