@@ -13,6 +13,7 @@ const config = {
   WEB_APP_URL: process.env.WEB_APP_URL as string,
   PORT: process.env.PORT || 8000,
   HOST: process.env.HOST || "0.0.0.0",
+  TOKEN_SECRET: process.env.TOKEN_SECRET as string,
 };
 
 export default config;

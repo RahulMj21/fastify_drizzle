@@ -13,7 +13,13 @@ class RolesServices {
     }
   };
 
-  findRoleByName = async (name: string, applicationId: string) => {
+  findRoleByName = async ({
+    name,
+    applicationId,
+  }: {
+    name: string;
+    applicationId: string;
+  }) => {
     try {
       const result = await db
         .select({ id: roles.id })

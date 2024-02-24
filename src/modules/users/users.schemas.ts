@@ -19,3 +19,19 @@ export type TCreateUserInput = z.infer<typeof createUserInputSchema>;
 export const createUserInputJSONSchema = {
   body: zodToJsonSchema(createUserInputSchema, "createUserInputSchema"),
 };
+
+export const loginInputSchema = z.object({
+  email: z
+    .string({ required_error: "Email is required" })
+    .email("Invalid email"),
+  password: z
+    .string({ required_error: "Password is required" })
+    .min(8, "Password must contain atleast 8 characters"),
+  applicationId: z.string(),
+});
+
+export type TLoginInput = z.infer<typeof loginInputSchema>;
+
+export const loginInputJSONSchema = {
+  body: zodToJsonSchema(loginInputSchema, "loginInputSchema"),
+};

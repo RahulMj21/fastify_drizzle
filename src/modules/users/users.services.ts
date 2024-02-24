@@ -1,7 +1,7 @@
 import { db } from "@/database";
-import { users, usersToRoles } from "@/database/schema";
+import { applications, roles, users, usersToRoles } from "@/database/schema";
 import { generatePassword } from "@/utils";
-import { InferInsertModel, eq } from "drizzle-orm";
+import { InferInsertModel, and, eq } from "drizzle-orm";
 
 class UsersServices {
   createUser = async (payload: InferInsertModel<typeof users>) => {
@@ -23,7 +23,7 @@ class UsersServices {
     }
   };
 
-  getUsersByApplicationId = async (applicationId: string) => {
+  findUsersByApplicationId = async (applicationId: string) => {
     try {
       const result = await db
         .select({
@@ -57,6 +57,43 @@ class UsersServices {
   assignRoleToUser = async (payload: InferInsertModel<typeof usersToRoles>) => {
     try {
       const result = await db.insert(usersToRoles).values(payload).returning();
+
+      return result[0];
+    } catch (error) {
+      return false;
+    }
+  };
+
+  findUserByEmail = async ({
+    email,
+    applicationId,
+  }: {
+    email: string;
+    applicationId: string;
+  }) => {
+    try {
+      const result = await db
+        .select({
+          id: users.id,
+          name: users.name,
+          email: users.email,
+          password: users.password,
+          applicationId: users.applicationId,
+          createdAt: users.createdAt,
+          permissions: roles.permissions,
+        })
+        .from(users)
+        .where(
+          and(eq(users.applicationId, applicationId), eq(users.email, email)),
+        )
+        .leftJoin(
+          usersToRoles,
+          and(
+            eq(usersToRoles.userId, users.id),
+            eq(usersToRoles.applicationId, users.applicationId),
+          ),
+        )
+        .leftJoin(roles, eq(roles.id, usersToRoles.roleId));
 
       return result[0];
     } catch (error) {
