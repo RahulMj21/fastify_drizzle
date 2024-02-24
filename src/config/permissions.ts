@@ -5,7 +5,9 @@ export const ALL_PERMISSIONS = [
 
   // posts
   "posts:write",
+  "posts:read",
   "posts:delete",
+  "posts:edit-own",
 ] as const;
 
 type TPermissions = Record<
@@ -20,7 +22,7 @@ export const PERMISSIONS = ALL_PERMISSIONS.reduce((acc, permission) => {
 
 export const APPLICATION_USER_PERMISSIONS = [
   PERMISSIONS["posts:write"],
-  PERMISSIONS["posts:delete"],
+  PERMISSIONS["posts:read"],
 ];
 
 export const SYSTEM_ROLES = {

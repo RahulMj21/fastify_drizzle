@@ -78,6 +78,7 @@ class UsersServices {
           name: users.name,
           email: users.email,
           password: users.password,
+          roleId: roles.id,
           applicationId: users.applicationId,
           createdAt: users.createdAt,
           permissions: roles.permissions,
