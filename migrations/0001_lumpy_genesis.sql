@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS "usersToRoles" (
 	"application_id" uuid NOT NULL,
 	"role_id" uuid NOT NULL,
-	"user_id" uuid NOT NULL
+	"user_id" uuid NOT NULL,
+	CONSTRAINT "usersToRoles_application_id_role_id_user_id_unique" UNIQUE("application_id","role_id","user_id")
 );
 
 DO $$ BEGIN

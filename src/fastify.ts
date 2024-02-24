@@ -4,6 +4,7 @@ import config from "@/config";
 import logger from "@/utils/logger";
 import applicationsRoutes from "@/applications/applications.routes";
 import { STATUS_TEXT } from "@/utils/constants";
+import usersRoutes from "@/users/users.routes";
 
 const buildServer = () => {
   const fastify = Fastify({
@@ -24,6 +25,7 @@ const buildServer = () => {
 
   // register routes
   fastify.register(applicationsRoutes, { prefix: "/api/v1/applications" });
+  fastify.register(usersRoutes, { prefix: "/api/v1/users" });
 
   return fastify;
 };

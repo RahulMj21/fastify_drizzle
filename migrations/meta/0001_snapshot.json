@@ -1,6 +1,6 @@
 {
-  "id": "87cee95c-dc85-423c-bc29-f75a7a7da63a",
-  "prevId": "1c443c05-72e1-47db-9f83-6d95c303126e",
+  "id": "a4114e91-9432-4836-8f50-2dc410ba4c3d",
+  "prevId": "8cd0c143-e146-4bef-8fd3-be7b768f0ec9",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -110,7 +110,16 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "roles_name_application_id_unique": {
+          "name": "roles_name_application_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "name",
+            "application_id"
+          ]
+        }
+      }
     },
     "users": {
       "name": "users",
@@ -187,7 +196,94 @@
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
+      "uniqueConstraints": {
+        "users_email_application_id_unique": {
+          "name": "users_email_application_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email",
+            "application_id"
+          ]
+        }
+      }
+    },
+    "usersToRoles": {
+      "name": "usersToRoles",
+      "schema": "",
+      "columns": {
+        "application_id": {
+          "name": "application_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role_id": {
+          "name": "role_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "usersToRoles_application_id_applications_id_fk": {
+          "name": "usersToRoles_application_id_applications_id_fk",
+          "tableFrom": "usersToRoles",
+          "tableTo": "applications",
+          "columnsFrom": [
+            "application_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "usersToRoles_role_id_roles_id_fk": {
+          "name": "usersToRoles_role_id_roles_id_fk",
+          "tableFrom": "usersToRoles",
+          "tableTo": "roles",
+          "columnsFrom": [
+            "role_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "usersToRoles_user_id_users_id_fk": {
+          "name": "usersToRoles_user_id_users_id_fk",
+          "tableFrom": "usersToRoles",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "usersToRoles_application_id_role_id_user_id_unique": {
+          "name": "usersToRoles_application_id_role_id_user_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "application_id",
+            "role_id",
+            "user_id"
+          ]
+        }
+      }
     }
   },
   "enums": {},

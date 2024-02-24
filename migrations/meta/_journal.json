@@ -5,22 +5,15 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1708410345185,
-      "tag": "0000_fast_joseph",
+      "when": 1708753721803,
+      "tag": "0000_cloudy_dark_phoenix",
       "breakpoints": false
     },
     {
       "idx": 1,
       "version": "5",
-      "when": 1708437779578,
-      "tag": "0001_nervous_kulan_gath",
-      "breakpoints": false
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1708438446286,
-      "tag": "0002_flat_dark_beast",
+      "when": 1708753737963,
+      "tag": "0001_lumpy_genesis",
       "breakpoints": false
     }
   ]

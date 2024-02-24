@@ -10,8 +10,8 @@ import {
 } from "@/config/permissions";
 
 class ApplicationsControllers {
-  services: ApplicationServices;
-  rolesServices: RolesServices;
+  private services: ApplicationServices;
+  private rolesServices: RolesServices;
 
   constructor() {
     this.services = new ApplicationServices();

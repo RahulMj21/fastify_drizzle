@@ -5,6 +5,7 @@ import {
   uuid,
   varchar,
   text,
+  unique,
 } from "drizzle-orm/pg-core";
 
 export const applications = pgTable("applications", {
@@ -27,7 +28,7 @@ export const users = pgTable(
   },
   (users) => {
     return {
-      cpk: [users.email, users.applicationId],
+      cpk: unique().on(users.email, users.applicationId),
       idIndex: uniqueIndex("users_id_index").on(users.id),
     };
   },
@@ -45,7 +46,7 @@ export const roles = pgTable(
   },
   (roles) => {
     return {
-      cpk: [roles.name, roles.applicationId],
+      cpk: unique().on(roles.name, roles.applicationId),
       idIndex: uniqueIndex("roles_id_index").on(roles.id),
     };
   },
@@ -68,11 +69,11 @@ export const usersToRoles = pgTable(
   },
   (usersToRoles) => {
     return {
-      cpk: [
+      cpk: unique().on(
         usersToRoles.applicationId,
         usersToRoles.roleId,
         usersToRoles.userId,
-      ],
+      ),
     };
   },
 );
